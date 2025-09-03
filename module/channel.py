@@ -38,5 +38,22 @@ class Channel:
     def predict_verdict(self, *args, **kwargs):
         if self.model is None or self.data is None:
             raise ValueError("Model or data not set.")
-        # Example: model should have a predict method
+        
         return self.model.predict(self.data, *args, **kwargs)
+
+    def train_model(self):
+        if self.model is None:
+            raise ValueError("Model not set.")
+        
+
+    def classify_data(self):
+        if self.model is None or self.data is None:
+            raise ValueError("Model or data not set.")
+       
+        return self.model.classify(self.data)
+
+    def start_work(self):
+        if self.state == ChannelState.TRAINING:
+            self.train_model()
+        elif self.state == ChannelState.CLASSIFYING:
+            self.classify_data()
